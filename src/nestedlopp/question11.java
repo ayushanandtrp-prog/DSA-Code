@@ -1,0 +1,15 @@
+package nestedlopp;
+import java.util.Scanner;
+public class question11 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of raw :- ");
+        int raw = sc.nextInt();
+       for(int i = 1 ; i <= raw ; i ++){
+           for(int j = raw ; j >= i  ; j--){
+               System.out.print("* ");
+           }
+           System.out.println();
+       }
+    }
+}
