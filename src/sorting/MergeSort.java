@@ -3,56 +3,60 @@ package sorting;
 import java.util.Scanner;
 
 public class MergeSort {
-    public static void main(String[]args){
-//        int[] A = {10 , 40 , 50 , 80 , 90};
-//        int[] B = {20 , 30 , 60 , 70};
-//        int [] result =new int[A.length+B.length];
+    public static void main(String[] args){
+//        int []arr ={23 , 12 , 65 , 87 , 54 , 32 , 98};
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter first array length :- ");
+        System.out.print("Enter length of Array :- ");
         int n = sc.nextInt();
-        System.out.print("Enter second array length :- ");
-        int m = sc.nextInt();
-        int []A = new int[n];
-        System.out.print("Enter Elements of First Array :- ");
-        for(int i = 0 ; i < A.length ;i++){
-            A[i] = sc.nextInt();
+        int[]arr = new int[n];
+        System.out.print("Enter elements of Array :- ");
+        for(int i = 0 ; i < arr.length ;i++){
+            arr[i] = sc.nextInt();
         }
-        int[]B = new int[m];
-        System.out.print("Enter Elements of Second Array :- ");
-        for(int i = 0 ; i < B.length ;i++){
-            B[i] = sc.nextInt();
-        }
-        int[] result = new int[A.length+B.length];
-        Merge(result , A , B);
-        for(int ele : result){
-            System.out.print(ele +" ");
-        }
+        merge(arr);
+        for(int ele:arr) System.out.print(ele+" ");
     }
-     public static void Merge(int [] result , int[]A , int[]B){
-        int i = 0;
-        int j = 0;
-        int k =0;
-        while(i < A.length && j < B.length){
-            if(A[i] < B[j]){
-                result[k] = A[i];
-                i++;
-                k++;
-            }
-            else{
-                result[k] = B[j];
-                j++;
-                k++;
-            }
+    public static void merge(int []arr){
+        int n = arr.length;
+        if(n == 1)  return;
+        int [] A = new int[n/2];
+        int [] B = new int[n-n/2];
+        int idx =0;
+        for (int i = 0 ; i < A.length ;i++){
+            A[i] = arr[idx++];
         }
-        while(i < A.length) {
-            result[k] = A[i];
-            i++;
-            k++;
+        for(int i = 0 ; i < B.length ;i++){
+            B[i] = arr[idx++];
         }
-        while(j < B.length){
-            result[k] = B[j];
-            j++;
-            k++;
-        }
-     }
+        merge(A);
+        merge(B);
+        Merge(arr,A,B);
+    }
+    public static void Merge(int []arr ,int []A , int []B){
+       int i =0 ;
+       int j = 0;
+       int k =0;
+       while (i < A.length && j < B.length){
+           if(A[i] < B[j]){
+               arr[k] = A[i];
+               i++;
+               k++;
+           }
+           else{
+               arr[k] = B[j];
+               j++;
+               k++;
+           }
+       }
+       while(i < A.length){
+           arr[k] = A[i];
+           i++;
+           k++;
+       }
+       while(j < B.length){
+           arr[k] = B[j];
+           j++;
+           k++;
+       }
+    }
 }
