@@ -1,11 +1,5 @@
 package LinkedList;
-class Node{
-    int val;
-    Node next;
-    Node(int val){
-        this.val = val;
-    }
-}
+
 class Linkedlist{
     Node tail;
     Node Head;
@@ -30,7 +24,7 @@ class Linkedlist{
     }
     void DeleteAtHead(){
         if(Head == null){
-            System.out.println("Lis is Empty! ");
+            System.out.println("List is Empty! ");
             return;
         }
         Head = Head.next;
@@ -48,6 +42,44 @@ class Linkedlist{
         }
         System.out.println();
     }
+    void insert(int val , int idx){
+        if(idx < 0 || idx > size){
+            System.out.println("Invalid Index ! ");
+            return;
+        }
+        else if(idx == 0){
+            AddAtHead(val);
+        } else if(idx == size){
+            AddAtTail(val);
+        }
+        else {
+            Node temp = Head;
+            for(int i = 1 ; i < idx-1 ; i++){
+                temp = temp.next;
+            }
+            Node t = new Node(val);
+            t.next = temp.next;
+            temp.next = t;
+            size++;
+        }
+    }
+    void Delete(int idx){
+        if(idx < 0 || idx >= size){
+            System.out.println("Invalid Index ! ");
+            return;
+        }
+        if(idx == 0){
+            DeleteAtHead();
+            return;
+        }
+        Node temp = Head;
+        for(int i = 1 ; i <= idx-1 ; i++){
+            temp = temp.next;
+        }
+        temp.next = temp.next.next;
+        if(idx == size-1) tail = temp;
+        size--;
+    }
 }
 
 public class LinkedListDataStructure {
@@ -64,5 +96,9 @@ public class LinkedListDataStructure {
         ll.DeleteAtHead();
         ll.display();
         System.out.print(ll.size);
+        ll.insert(56 , 3);
+        ll.display();
+        ll.Delete(3);
+        ll.display();
     }
 }
